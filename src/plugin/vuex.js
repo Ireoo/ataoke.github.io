@@ -40,7 +40,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         site: {
-            name: "爱淘客",
+            name: "爱淘客网络平台",
             title: "爱淘客 - aTaoke.cc",
             page: "爱淘客 - aTaoke.cc",
             keyword: "爱淘客，淘宝客，淘客平台",

@@ -38,5 +38,5 @@ export default {
 
 <style>
 @import url("/static/css/style.css");
-@import url("//at.alicdn.com/t/font_626708_uhijmphd4xs3v7vi.css");
+@import url("//at.alicdn.com/t/font_626708_k7nzxp7adeptlnmi.css");
 </style>

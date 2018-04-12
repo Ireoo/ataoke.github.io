@@ -1,8 +1,26 @@
 <template>
 	<div class="main">
+
 		<b-row>
 			<b-col>
-				<h1>更新日志</h1>
+				<b-card title="爱淘客网络平台">
+					<p class="card-text">
+						爱淘客网络平台是基于electron-vue创建的桌面应用系统；开发者可以创建插件收取服务费；使用者可以购买需要的插件一键使用。
+					</p>
+					<b-button-group>
+						<b-dropdown class="download" right split text="下载最新版本" to="/download/" variant="outline-primary">
+							<b-dropdown-item to="/download/ataoke.exe">Windows</b-dropdown-item>
+							<b-dropdown-item to="/download/ataoke.dmg">Mac OS</b-dropdown-item>
+							<b-dropdown-item to="/download/ataoke">Linux</b-dropdown-item>
+						</b-dropdown>
+					</b-button-group>
+				</b-card>
+			</b-col>
+		</b-row>
+
+		<b-row>
+			<b-col>
+				<h2>平台更新日志</h2>
 			</b-col>
 		</b-row>
 
@@ -11,13 +29,13 @@
 				<ul class="commits">
 					<li v-for="commit in commits" :key="commit.sha">
 						<div>
-							<h2>
+							<h3>
 								<img :src="commit.author.avatar_url" /> {{commit.commit.author.name}}
 								<br>
 								<p>
 									<a :href="commit.author.html_url" target="_blank">@{{commit.author.login}}</a>
 								</p>
-							</h2>
+							</h3>
 							<div class="commit">{{commit.commit.message}}
 								<span>
 									<i class="iconfont icon-shijian1"></i>{{commit.commit.committer.date | timer}}
@@ -75,6 +93,29 @@ export default {
 </script>
 
 <style scoped>
+div.card {
+	border: none;
+	margin-bottom: 30px;
+}
+
+div.card > div.card-body {
+	padding: 0;
+}
+
+div.card > div.card-body > h4 {
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+
+div.card > div.card-body > p.card-text {
+	color: #333;
+	margin-bottom: 20px;
+}
+
+div.card > div.card-body > h1 {
+	font-size: 16px;
+}
+
 ul.commits {
 	background: #fff;
 }
@@ -89,7 +130,7 @@ ul.commits > li > div {
 	display: -webkit-flex;
 }
 
-ul.commits > li > div > h2 {
+ul.commits > li > div > h3 {
 	color: #fff;
 	font-weight: bold;
 	display: inline-block;
@@ -102,17 +143,17 @@ ul.commits > li > div > h2 {
 	min-width: 150px;
 }
 
-ul.commits > li > div > h2 > p {
+ul.commits > li > div > h3 > p {
 	padding-top: 10px;
 	margin: 0;
 }
 
-ul.commits > li > div > h2 > p > a {
+ul.commits > li > div > h3 > p > a {
 	color: rgb(242, 242, 242);
 	font-weight: 100;
 }
 
-ul.commits > li > div > h2 > img {
+ul.commits > li > div > h3 > img {
 	position: absolute;
 	top: 5px;
 	left: 5px;
