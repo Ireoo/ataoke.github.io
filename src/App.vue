@@ -4,7 +4,7 @@
 		<div :class="{'body': true, 'noHead': !$store.state.site.showHeader, 'noFoot': !$store.state.site.showFooter}">
 			<router-view/>
 		</div>
-		<vue-footer></vue-footer>
+		<!-- <vue-footer></vue-footer> -->
 	</div>
 </template>
 
@@ -38,4 +38,5 @@ export default {
 
 <style>
 @import url("/static/css/style.css");
+@import url("//at.alicdn.com/t/font_626708_uhijmphd4xs3v7vi.css");
 </style>
