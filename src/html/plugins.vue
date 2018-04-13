@@ -7,30 +7,27 @@
 					<p class="card-text">
 						爱淘客网络平台是基于electron-vue创建的桌面应用系统；开发者可以创建插件收取服务费；使用者可以购买需要的插件一键使用。
 					</p>
-					<b-button-group>
-						<b-dropdown class="download" right split text="下载最新版本" to="/download/" variant="outline-primary">
-							<b-dropdown-item to="/download/ataoke.exe">Windows</b-dropdown-item>
-							<b-dropdown-item to="/download/ataoke.dmg">Mac OS</b-dropdown-item>
-							<b-dropdown-item to="/download/ataoke">Linux</b-dropdown-item>
-						</b-dropdown>
-					</b-button-group>
 				</b-card>
 			</b-col>
 		</b-row>
 
 		<b-row>
-			<b-col>
-				<h2>平台更新日志</h2>
+			<b-col cols="3" class="lists">
+				<h2>类型</h2>
+				<ul>
+					<li v-for="category in categorys" :key="category">{{category}}</li>
+				</ul>
+				<h2>关键字</h2>
+				<ul>
+					<li v-for="keyword in keywords" :key="keyword">{{keyword}}</li>
+				</ul>
 			</b-col>
-		</b-row>
-
-		<b-row>
 			<b-col>
-				<ul class="commits">
+				<ul class="plugins">
 					<li v-for="plugin in plugins" :key="plugin.sha">
-						<div>
-							{{plugin}}
-						</div>
+						<img :src="plugin.readme.icon" /> {{plugin.readme.name}}
+						<span>{{plugin.readme.description}}</span>
+						<!-- <div>{{plugin}}</div> -->
 					</li>
 				</ul>
 			</b-col>
@@ -47,7 +44,9 @@ export default {
 	title: "插件管理",
 	data: function() {
 		return {
-			plugins: []
+			plugins: [],
+			categorys: [],
+			keywords: []
 		};
 	},
 	filters: {
@@ -73,6 +72,10 @@ export default {
 					console.log(r.data);
 					try {
 						v.readme = YAML.load(r.data);
+						v.readme.keywords.map(k => {
+							this.keywords.push(k);
+						});
+						this.categorys.push(v.readme.category);
 					} catch (e) {
 						console.log(e);
 					}
@@ -94,139 +97,41 @@ div.card > div.card-body {
 	padding: 0;
 }
 
-div.card > div.card-body > h4 {
-	font-size: 30px;
-	margin-bottom: 20px;
+div.lists h2 {
+	font-size: 14px;
+	font-weight: bold;
 }
 
-div.card > div.card-body > p.card-text {
-	color: #333;
-	margin-bottom: 20px;
+div.lists ul li {
+	padding: 5px;
+	background: #ccc;
+	border-radius: 3px;
+	margin-bottom: 5px;
 }
 
-div.card > div.card-body > h1 {
-	font-size: 16px;
+ul.plugins > li {
+	padding: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	border: 1px solid #fff;
+	border-radius: 3px;
 }
 
-ul.commits {
-	background: #fff;
-}
-
-ul.commits > li > div {
+ul.plugins > li:hover {
 	border: 1px solid #4898f8;
-	margin-bottom: 10px;
-	background: #fff;
-	border-radius: 5px;
-	overflow: hidden;
-	display: flex;
-	display: -webkit-flex;
-}
-
-ul.commits > li > div > h3 {
-	color: #fff;
-	font-weight: bold;
-	display: inline-block;
-	font-size: 14px;
-	background: #4898f8;
-	padding: 5px 5px 5px 50px;
-	position: relative;
-	/* border-radius: 5px; */
-	margin: 0;
-	min-width: 150px;
-}
-
-ul.commits > li > div > h3 > p {
-	padding-top: 10px;
-	margin: 0;
-}
-
-ul.commits > li > div > h3 > p > a {
-	color: rgb(242, 242, 242);
-	font-weight: 100;
-}
-
-ul.commits > li > div > h3 > img {
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 40px;
-	height: 40px;
-	margin-right: 10px;
-	border-radius: 3px;
-	background: #fff;
-}
-
-ul.commits > li > div > div.commit {
-	position: relative;
-	padding: 5px;
-	font-size: 14px;
-	-webkit-flex: 1;
-	flex: 1;
-}
-
-ul.commits > li > div > div.commit > span {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	font-size: 12px;
-	font-weight: 100;
-	color: #333;
-}
-
-ul.commits > li > div > div.commit > span > i {
-	margin: 0 5px 0 10px;
-	font-size: 12px;
-	font-weight: bold;
 	color: #4898f8;
+	cursor: pointer;
 }
 
-ul.files {
-	padding-top: 5px;
+ul.plugins > li > img {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
 }
 
-ul.files > h3 {
-	margin-bottom: 5px;
-	font-size: 12px;
-	font-weight: 100;
-	color: #ccc;
-}
-
-ul.files > li {
-	padding: 5px;
-	border-radius: 3px;
-	color: #333;
-	margin-bottom: 5px;
-}
-
-ul.files > li.added {
-	background: rgb(220, 255, 220);
-}
-
-ul.files > li.removed {
-	background: rgb(255, 218, 218);
-}
-
-ul.files > li.modified {
-	background: rgb(255, 241, 220);
-}
-
-ul.files > li > span {
-	float: right;
-	background: #fff;
-	padding: 0 5px;
-	border-radius: 3px;
-	font-weight: bold;
-}
-
-ul.files > li.added > span {
-	color: rgb(0, 134, 0);
-}
-
-ul.files > li.removed > span {
-	color: rgb(138, 0, 0);
-}
-
-ul.files > li.modified > span {
-	color: rgb(134, 81, 0);
+ul.plugins > li > span {
+	font-weight: normal;
+	padding-left: 10px;
+	color: #777;
 }
 </style>
