@@ -113,6 +113,7 @@ div.header > div.main-header > div > ul > li > a > i {
 
 div.header > div.main-header > div > ul > li > a > span {
 	font-size: 14px;
+	font-weight: bold;
 }
 
 div.header > div.main-header > div > ul > li > a.logo > i {

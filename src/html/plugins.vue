@@ -222,8 +222,18 @@ ul.plugins > li > img {
 	width: 50px;
 	height: 50px;
 	margin-right: 10px;
-	background: #ccc;
+	/* background: #ccc; */
 	border-radius: 3px;
+	border: none;
+	overflow: hidden;
+}
+
+ul.plugins > li > i.img {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	background: #ccc;
+	border-radius: 25px;
 	border: none;
 	overflow: hidden;
 }
