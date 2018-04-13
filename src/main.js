@@ -15,6 +15,7 @@ import "./plugin/Bootstarp";
 import "./plugin/db";
 import "./plugin/http";
 import "./plugin/QRcode";
+import "./plugin/array";
 
 new Vue({
     el: "#app",

@@ -13,19 +13,23 @@
 
 		<b-row>
 			<b-col cols="3" class="lists">
-				<h2>类型</h2>
-				<ul>
-					<li v-for="category in categorys" :key="category">{{category}}</li>
+				<h2 v-if="categorys.length > 0">类型</h2>
+				<ul v-if="categorys.length > 0">
+					<li v-for="category in categorys" :key="category.title" :class="{on: category.show}" @click="category.show=!category.show">{{category.title}}
+						<span>{{category.count}}</span>
+					</li>
 				</ul>
-				<h2>关键字</h2>
-				<ul>
-					<li v-for="keyword in keywords" :key="keyword">{{keyword}}</li>
+				<h2 v-if="keywords.length > 0">关键字</h2>
+				<ul v-if="keywords.length > 0">
+					<li v-for="keyword in keywords" :key="keyword.title" :class="{on: keyword.show}" @click="keyword.show=!keyword.show">{{keyword.title}}
+						<span>{{keyword.count}}</span>
+					</li>
 				</ul>
 			</b-col>
 			<b-col>
 				<ul class="plugins">
-					<li v-for="plugin in plugins" :key="plugin.sha">
-						<img :src="plugin.readme.icon" /> {{plugin.readme.name}}
+					<li v-for="plugin in pluginsFilter" :key="plugin.sha">
+						<img :src="plugin.icon" :alt="plugin.readme.name" /> {{plugin.readme.name}}
 						<span>{{plugin.readme.description}}</span>
 						<!-- <div>{{plugin}}</div> -->
 					</li>
@@ -54,28 +58,96 @@ export default {
 			return moment(v).format("MM-DD");
 		}
 	},
+	computed: {
+		pluginsFilter: function() {
+			let plugins = [];
+			// console.log(this.plugins);
+			if (this.plugins.length > 0) {
+				plugins = this.plugins.filter(v => {
+					let isKeywords = false;
+					if (v.readme.keywords) {
+						v.readme.keywords.forEach(keyword => {
+							if (
+								this.$has(this.keywords, {
+									title: keyword,
+									show: true
+								})
+							)
+								isKeywords = true;
+						});
+					}
+					// console.log(isKeywords);
+					if (
+						v.readme.category &&
+						(this.$has(this.categorys, {
+							title: v.readme.category,
+							show: true
+						}) ||
+							isKeywords)
+					) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+			}
+			// console.log(plugins);
+			return plugins;
+		}
+	},
+
 	mounted: function() {
 		this.$http(
-			"https://api.github.com/repos/ataoke/ataoke.github.io/contents/plugins?ref=master"
+			"https://api.github.com/repos/ataoke/plugins/contents?ref=master"
 		).then(res => {
-			console.log(res.data);
-			this.plugins = res.data.map(v => {
-				v.readme = {};
-				return v;
-			});
+			// console.log(res.data);
+			this.plugins = res.data
+				.filter(v => v.download_url === null)
+				.map(v => {
+					v.readme = {};
+					v.icon = `https://raw.githubusercontent.com/ataoke/plugins/master/${
+						v.path
+					}/favicon.ico`;
+					return v;
+				});
 			this.plugins.map(v => {
 				this.$http(
-					`https://raw.githubusercontent.com/ataoke/ataoke.github.io/master/${
+					`https://raw.githubusercontent.com/ataoke/plugins/master/${
 						v.path
 					}/readme.yml`
 				).then(r => {
-					console.log(r.data);
+					// console.log(r.data);
 					try {
 						v.readme = YAML.load(r.data);
 						v.readme.keywords.map(k => {
-							this.keywords.push(k);
+							if (this.$has(this.keywords, { title: k })) {
+								this.keywords.map(keyword => {
+									if (keyword.title === k) keyword.count++;
+								});
+							} else {
+								this.keywords.push({
+									title: k,
+									show: true,
+									count: 1
+								});
+							}
 						});
-						this.categorys.push(v.readme.category);
+						if (
+							this.$has(this.categorys, {
+								title: v.readme.category
+							})
+						) {
+							this.categorys.map(category => {
+								if (category.title === v.readme.category)
+									category.count++;
+							});
+						} else {
+							this.categorys.push({
+								title: v.readme.category,
+								show: true,
+								count: 1
+							});
+						}
 					} catch (e) {
 						console.log(e);
 					}
@@ -104,9 +176,32 @@ div.lists h2 {
 
 div.lists ul li {
 	padding: 5px;
-	background: #ccc;
+	background: rgb(242, 242, 242);
 	border-radius: 3px;
 	margin-bottom: 5px;
+	color: #4898f8;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+div.lists ul li.on {
+	color: #fff;
+	background: #4898f8;
+	font-weight: normal;
+}
+
+div.lists ul li span {
+	float: right;
+	background: #4898f8;
+	color: #fff;
+	padding: 0 5px;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+div.lists ul li.on span {
+	background: #fff;
+	color: #4898f8;
 }
 
 ul.plugins > li {
@@ -127,6 +222,10 @@ ul.plugins > li > img {
 	width: 50px;
 	height: 50px;
 	margin-right: 10px;
+	background: #ccc;
+	border-radius: 3px;
+	border: none;
+	overflow: hidden;
 }
 
 ul.plugins > li > span {

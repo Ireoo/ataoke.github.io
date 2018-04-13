@@ -6,6 +6,7 @@
 					<li>
 						<router-link to="/" class="logo">
 							<i class="iconfont icon-wangluo"></i>
+							<span>{{$store.state.site.title}}</span>
 						</router-link>
 
 						<router-link to="/plugins">

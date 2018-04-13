@@ -41,8 +41,8 @@ const store = new Vuex.Store({
     state: {
         site: {
             name: "爱淘客网络平台",
-            title: "爱淘客 - aTaoke.cc",
-            page: "爱淘客 - aTaoke.cc",
+            title: "爱淘客网络平台",
+            page: "爱淘客网络平台 - aTaoke.cc",
             keyword: "爱淘客，淘宝客，淘客平台",
             description: "《爱淘客》是专注淘宝客营销的平台，集成众多社交平台，集成3级分销系统。在购物的同时还可以赚钱，一切都是那么的简单！",
             showHeader: true,

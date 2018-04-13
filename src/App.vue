@@ -25,11 +25,13 @@ export default {
 	},
 	watch: {
 		"$route.meta.title": function(v) {
-			document.title = `${v} - 爱淘客`;
+			document.title = `${v} - ${this.$store.state.site.page}`;
 		}
 	},
 	mounted: function() {
-		document.title = `${this.$route.meta.title} - 爱淘客`;
+		document.title = `${this.$route.meta.title} - ${
+			this.$store.state.site.page
+		}`;
 
 		this.$nextTick(function() {});
 	}
