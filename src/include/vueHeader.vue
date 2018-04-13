@@ -3,14 +3,17 @@
 		<div class="main-header">
 			<div>
 				<ul class="left">
-					<li class="logo">
-						<router-link to="/">
+					<li>
+						<router-link to="/" class="logo">
 							<i class="iconfont icon-wangluo"></i>
-							<span v-text="$store.state.site.name"></span>
+						</router-link>
+
+						<router-link to="/plugins">
+							<span>插件</span>
 						</router-link>
 					</li>
 				</ul>
-
+				<br />
 			</div>
 		</div>
 	</div>
@@ -34,7 +37,7 @@ export default {
 
 <style scoped>
 div.header {
-	height: 40px;
+	height: 60px;
 }
 
 div.header > div.main-header {
@@ -42,11 +45,10 @@ div.header > div.main-header {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 40px;
+	height: 60px;
 	background: RGBA(0, 0, 0, 0.8);
 	color: #fff;
 	text-align: left;
-	line-height: 40px;
 	padding: 5px;
 	z-index: 1;
 }
@@ -55,14 +57,16 @@ div.header > div.main-header > div {
 	padding: 0 5px;
 	max-width: 900px;
 	margin: auto;
+	line-height: 50px;
 }
 
 div.header > div.main-header > div > ul {
-	line-height: 30px;
+	line-height: 50px;
 	width: 50%;
 	display: inline-block;
 	list-style-type: none;
 	padding: 0;
+	margin: 0;
 }
 
 div.header > div.main-header > div > ul.left {
@@ -75,9 +79,12 @@ div.header > div.main-header > div > ul.right {
 }
 
 div.header > div.main-header > div > ul > li {
-	line-height: 30px;
 	display: inline-block;
+	line-height: 50px;
 	margin: 0 10px;
+	display: flex; /*Flex布局*/
+	display: -webkit-flex; /* Safari */
+	align-items: center; /*指定垂直居中*/
 }
 
 div.header > div.main-header > div > ul > li > button {
@@ -91,35 +98,27 @@ div.header > div.main-header > div > ul > li > button {
 
 div.header > div.main-header > div > ul > li > a {
 	color: #fff;
-	line-height: 30px;
+	margin-right: 20px;
 }
 
 div.header > div.main-header > div > ul > li > a:hover {
-	color: #ff7272;
-}
-
-div.header > div.main-header > div > ul > li.logo > a:hover {
+	color: #4898f8;
 	text-decoration: none;
 }
 
-div.header > div.main-header > div > ul > li > a > i,
-div.header > div.main-header > div > ul > li > a > svg,
-div.header > div.main-header > div > ul > li > a > img {
+div.header > div.main-header > div > ul > li > a > i {
 	margin-right: 5px;
 }
 
-div.header > div.main-header > div > ul > li.logo > a > i,
-div.header > div.main-header > div > ul > li.logo > a > svg,
-div.header > div.main-header > div > ul > li.logo > a > img {
-	font-size: 20px;
-	color: #ff0000;
-}
-
-div.header > div.main-header > div > ul > li.logo > a > span {
+div.header > div.main-header > div > ul > li > a > span {
 	font-size: 14px;
 }
 
-div.header > div.main-header > div > ul > li.logo > a > span:hover {
-	color: red;
+div.header > div.main-header > div > ul > li > a.logo > i {
+	font-size: 30px;
+}
+
+br {
+	clear: both;
 }
 </style>
