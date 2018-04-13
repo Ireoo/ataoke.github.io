@@ -135,7 +135,7 @@ ul.commits > li > div > h3 {
 	color: #fff;
 	font-weight: bold;
 	display: inline-block;
-	font-size: 14px;
+	font-size: 16px;
 	background: #4898f8;
 	padding: 5px 5px 5px 50px;
 	position: relative;
@@ -145,12 +145,13 @@ ul.commits > li > div > h3 {
 }
 
 ul.commits > li > div > h3 > p {
-	padding-top: 10px;
+	padding-top: 5px;
 	margin: 0;
+	color: #333;
 }
 
 ul.commits > li > div > h3 > p > a {
-	color: rgb(242, 242, 242);
+	color: #333;
 	font-weight: 100;
 }
 
