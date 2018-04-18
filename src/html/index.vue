@@ -21,7 +21,7 @@
 
 		<b-row>
 			<b-col>
-				<h2>平台更新日志</h2>
+				<h2>最近更新</h2>
 			</b-col>
 		</b-row>
 
@@ -81,7 +81,7 @@ export default {
 			this.commits = res.data.map(v => {
 				v.files = [];
 				return v;
-			});
+			}).filter((v, i) => i < 1);
 			this.commits.map(v => {
 				this.$http(v.url).then(r => {
 					v.files = r.data.files;
