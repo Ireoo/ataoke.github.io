@@ -4,7 +4,6 @@
 		<div :class="{'body': true, 'noHead': !$store.state.site.showHeader, 'noFoot': !$store.state.site.showFooter}">
 			<router-view/>
 		</div>
-		<script type="text/javascript" src="//js.users.51.la/19477209.js"></script>
 		<!-- <vue-footer></vue-footer> -->
 	</div>
 </template>
