@@ -50,3 +50,11 @@ a:hover {
 p {
     margin: 0;
 }
+
+div.footer {
+    text-align: center;
+}
+
+div.footer a {
+    display: inline-block;
+}

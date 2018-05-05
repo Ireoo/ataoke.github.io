@@ -39,6 +39,6 @@ export default {
 </script>
 
 <style>
-@import url("/static/css/style.css");
-@import url("//at.alicdn.com/t/font_626708_k7nzxp7adeptlnmi.css");
+/* @import url("/static/css/style.css");
+@import url("//at.alicdn.com/t/font_626708_k7nzxp7adeptlnmi.css"); */
 </style>
