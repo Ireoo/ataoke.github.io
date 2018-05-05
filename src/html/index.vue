@@ -8,7 +8,7 @@
 						爱淘客网络平台是基于electron-vue创建的桌面应用系统；开发者可以创建插件收取服务费；使用者可以购买需要的插件一键使用。
 					</p>
 					<b-button-group>
-						<b-button href="/download/ataoke.exe" variant="outline-primary">下载最新版本</b-button>
+						<b-button href="https://download.ataoke.cc/desktop/ataoke.exe" variant="outline-primary">下载最新版本</b-button>
 						<b-dropdown class="download" variant="outline-primary">
 							<b-dropdown-item href="/download/ataoke.exe">Windows</b-dropdown-item>
 							<b-dropdown-item href="/download/ataoke.dmg">Mac OS</b-dropdown-item>
