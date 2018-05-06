@@ -2,10 +2,10 @@
 	<div class="header" v-if="$store.state.site.showHeader">
 		<div class="main-header">
 			<div>
-				<ul class="left">
+				<ul>
 					<li>
 						<router-link to="/" class="logo">
-							<i class="iconfont icon-wangluo"></i>
+							<i class="iconfont icon-taobao"></i>
 							<span>{{$store.state.site.title}}</span>
 						</router-link>
 
@@ -63,7 +63,7 @@ div.header > div.main-header > div {
 
 div.header > div.main-header > div > ul {
 	line-height: 50px;
-	width: 50%;
+	/* width: 50%; */
 	display: inline-block;
 	list-style-type: none;
 	padding: 0;
@@ -118,6 +118,7 @@ div.header > div.main-header > div > ul > li > a > span {
 
 div.header > div.main-header > div > ul > li > a.logo > i {
 	font-size: 30px;
+	color: #999;
 }
 
 br {

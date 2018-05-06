@@ -243,4 +243,16 @@ ul.plugins > li > span {
 	padding-left: 10px;
 	color: #777;
 }
+
+@media (max-width: 600px) {
+	.row {
+		display: block;
+	}
+
+	.col-3 {
+		display: block;
+		flex: none;
+		max-width: 100%;
+	}
+}
 </style>

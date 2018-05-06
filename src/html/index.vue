@@ -78,10 +78,12 @@ export default {
 		this.$http(
 			"https://api.github.com/repos/ataoke/ataoke.github.io/commits"
 		).then(res => {
-			this.commits = res.data.map(v => {
-				v.files = [];
-				return v;
-			}).filter((v, i) => i < 1);
+			this.commits = res.data
+				.map(v => {
+					v.files = [];
+					return v;
+				})
+				.filter((v, i) => i < 5);
 			this.commits.map(v => {
 				this.$http(v.url).then(r => {
 					v.files = r.data.files;
@@ -142,6 +144,7 @@ ul.commits > li > div > h3 {
 	/* border-radius: 5px; */
 	margin: 0;
 	min-width: 150px;
+	min-height: 50px;
 }
 
 ul.commits > li > div > h3 > p {
@@ -238,5 +241,15 @@ ul.files > li.removed > span {
 
 ul.files > li.modified > span {
 	color: rgb(134, 81, 0);
+}
+
+@media (max-width: 600px) {
+	ul.commits > li > div {
+		display: block;
+	}
+
+	ul.commits > li > div > h3 {
+		display: block;
+	}
 }
 </style>
